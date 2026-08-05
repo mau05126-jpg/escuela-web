@@ -14,6 +14,25 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 
+(async () => {
+  try {
+    const tablas = [
+      ['alumnos',      'id_alumno'],
+      ['usuarios',     'id_usuario'],
+      ['instructores', 'id_instructor'],
+      ['cinturones',   'id_cinturon'],
+      ['avances',      'id_avance']
+    ];
+    for (const [tabla, col] of tablas) {
+      await sequelize.query(
+        `SELECT setval('${tabla}_${col}_seq', COALESCE((SELECT MAX(${col}) FROM ${tabla}), 0))`
+      );
+    }
+  } catch (err) {
+    console.error('Error al corregir secuencias:', err.message);
+  }
+})();
+
 app.get('/', async (req, res) => {
   try {
     const totalAlumnos = await Alumno.count();
