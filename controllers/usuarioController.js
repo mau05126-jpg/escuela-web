@@ -4,7 +4,7 @@ const { Usuario } = require('../models');
 const usuarioController = {
   index: async (req, res) => {
     try {
-      const usuarios = await Usuario.findAll();
+      const usuarios = await Usuario.findAll({ order: [['id_usuario', 'ASC']] });
       res.render('usuarios/index', { usuarios });
     } catch (err) {
       res.status(500).send('Error al cargar usuarios: ' + err.message);

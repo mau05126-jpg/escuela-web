@@ -3,7 +3,7 @@ const { Alumno, Cinturon } = require('../models');
 const alumnoController = {
   index: async (req, res) => {
     try {
-      const alumnos = await Alumno.findAll({ include: Cinturon });
+      const alumnos = await Alumno.findAll({ include: Cinturon, order: [['id_alumno', 'ASC']] });
       res.render('alumnos/index', { alumnos });
     } catch (err) {
       res.status(500).send('Error al cargar alumnos: ' + err.message);
