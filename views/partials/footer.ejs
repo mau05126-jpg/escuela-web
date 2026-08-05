@@ -21,6 +21,14 @@
     icon.className = links.classList.contains('open') ? 'bi bi-x' : 'bi bi-list';
   }
 
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const href = link.getAttribute('href');
+    const path = window.location.pathname;
+    if (href === '/' ? path === '/' : path.startsWith(href)) {
+      link.classList.add('active');
+    }
+  });
+
   function abrirModal(btn) {
     document.getElementById('modal-overlay').style.display = 'flex';
     document.getElementById('modal-confirmar').onclick = function() {
