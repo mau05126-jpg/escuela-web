@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<div class="card">
+  <h2><i class="bi bi-graph-up"></i> Nuevo Avance</h2>
+  <form action="/avances" method="POST">
+    <div class="form-grid">
+      <div class="form-group"><label>Alumno</label><select name="id_alumno"><% alumnos.forEach(a => { %><option value="<%= a.id_alumno %>"><%= a.nombre %></option><% }) %></select></div>
+      <div class="form-group"><label>Cinturón</label><select name="id_cinturon"><% cinturones.forEach(c => { %><option value="<%= c.id_cinturon %>"><%= c.nombre_cinturon %></option><% }) %></select></div>
+      <div class="form-group"><label>Instructor</label><select name="id_instructor"><% instructores.forEach(i => { %><option value="<%= i.id_instructor %>"><%= i.nombre %></option><% }) %></select></div>
+      <div class="form-group"><label>Fecha examen</label><input type="date" name="fecha_examen" required></div>
+      <div class="form-group"><label>Resultado</label><select name="resultado"><option value="aprobado">Aprobado</option><option value="no aprobado">No aprobado</option></select></div>
+      <div class="form-group"><label>Observaciones</label><input type="text" name="observaciones"></div>
+    </div>
+    <button class="btn btn-success">Guardar</button> <a href="/avances" class="btn btn-primary">Cancelar</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

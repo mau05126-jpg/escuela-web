@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<div class="card">
+  <h2><i class="bi bi-graph-up"></i> Editar Avance</h2>
+  <form action="/avances/actualizar/<%= avance.id_avance %>" method="POST">
+    <div class="form-grid">
+      <div class="form-group"><label>Alumno</label><select name="id_alumno"><% alumnos.forEach(a => { %><option value="<%= a.id_alumno %>" <%= avance.id_alumno==a.id_alumno?'selected':'' %>><%= a.nombre %></option><% }) %></select></div>
+      <div class="form-group"><label>Cinturón</label><select name="id_cinturon"><% cinturones.forEach(c => { %><option value="<%= c.id_cinturon %>" <%= avance.id_cinturon==c.id_cinturon?'selected':'' %>><%= c.nombre_cinturon %></option><% }) %></select></div>
+      <div class="form-group"><label>Instructor</label><select name="id_instructor"><% instructores.forEach(i => { %><option value="<%= i.id_instructor %>" <%= avance.id_instructor==i.id_instructor?'selected':'' %>><%= i.nombre %></option><% }) %></select></div>
+      <div class="form-group"><label>Fecha examen</label><input type="date" name="fecha_examen" value="<%= avance.fecha_examen %>" required></div>
+      <div class="form-group"><label>Resultado</label><select name="resultado"><option value="aprobado" <%= avance.resultado==='aprobado'?'selected':'' %>>Aprobado</option><option value="no aprobado" <%= avance.resultado==='no aprobado'?'selected':'' %>>No aprobado</option></select></div>
+      <div class="form-group"><label>Observaciones</label><input type="text" name="observaciones" value="<%= avance.observaciones %>"></div>
+    </div>
+    <button class="btn btn-success">Actualizar</button> <a href="/avances" class="btn btn-primary">Cancelar</a>
+  </form>
+</div>
+<%- include('../partials/footer') %>

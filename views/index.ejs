@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+<h2 style="margin-bottom:0.3rem"><i class="bi bi-speedometer2"></i> Inicio</h2>
+<p style="color:#555;margin-bottom:1.2rem;font-size:0.9rem">Panel de control - Escuela de Artes Marciales</p>
+
+<div class="stats">
+  <div class="stat-card" style="border-top-color:#1F3864">
+    <i class="bi bi-people" style="font-size:1.8rem;color:#1F3864"></i>
+    <div class="number"><%= totalAlumnos %></div>
+    <div class="label">Total Alumnos</div>
+  </div>
+  <div class="stat-card" style="border-top-color:#166534">
+    <i class="bi bi-check-circle" style="font-size:1.8rem;color:#166534"></i>
+    <div class="number"><%= avancesMes %></div>
+    <div class="label">Aprobados este mes</div>
+  </div>
+  <div class="stat-card" style="border-top-color:#b45309">
+    <i class="bi bi-award" style="font-size:1.8rem;color:#b45309"></i>
+    <div class="number"><%= totalCinturones %></div>
+    <div class="label">Niveles configurados</div>
+  </div>
+  <div class="stat-card" style="border-top-color:#7c3aed">
+    <i class="bi bi-person-badge" style="font-size:1.8rem;color:#7c3aed"></i>
+    <div class="number"><%= totalInstructores %></div>
+    <div class="label">Instructores</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2 style="font-size:1.1rem"><i class="bi bi-clock-history"></i> Actividad reciente</h2>
+  <% if (actividad.length === 0) { %>
+    <p style="color:#888;font-size:0.88rem">No hay actividad registrada aun.</p>
+  <% } else { %>
+    <% actividad.forEach(item => { %>
+      <div style="padding:0.55rem 0;border-bottom:1px solid #eee;font-size:0.85rem">
+        <% if (item.tipo === 'avance') { %>
+          <strong><%= item.nombre %></strong>
+          <%= item.resultado === 'aprobado' ? 'aprobó' : 'no aprobó' %>
+          <%= item.cinturon %>
+          <span style="color:#888">(por <%= item.instructor %>)</span>
+          - <span style="color:#999"><%= item.fecha ? item.fecha.split('-').reverse().join('/') : '' %></span>
+        <% } else { %>
+          <strong><%= item.nombre %></strong> se inscribió
+          - <span style="color:#999"><%= item.fecha ? item.fecha.split('-').reverse().join('/') : '' %></span>
+        <% } %>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

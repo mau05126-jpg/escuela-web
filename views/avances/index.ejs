@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+<div class="card">
+  <div class="top-bar"><h2><i class="bi bi-graph-up"></i> Avances</h2><a href="/avances/crear" class="btn btn-success">+ Nuevo</a></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Alumno</th><th>Cinturón</th><th>Instructor</th><th>Fecha</th><th>Resultado</th><th>Acciones</th></tr></thead>
+    <tbody><% avances.forEach(a => { %>
+      <tr><td><%= a.id_avance %></td>
+      <td><%= a.Alumno ? a.Alumno.nombre : 'N/A' %></td>
+      <td><span class="badge badge-blue"><%= a.Cinturon ? a.Cinturon.nombre_cinturon : 'N/A' %></span></td>
+      <td><%= a.Instructor ? a.Instructor.nombre : 'N/A' %></td>
+      <td><%= a.fecha_examen ? a.fecha_examen.split('-').reverse().join('/') : '' %></td>
+      <td><span class="badge <%= a.resultado==='aprobado'?'badge-green':'badge-red' %>"><%= a.resultado %></span></td>
+      <td class="actions"><a href="/avances/editar/<%= a.id_avance %>" class="btn btn-warning btn-sm">Editar</a>
+      <form action="/avances/eliminar/<%= a.id_avance %>" method="POST" style="display:inline"><button type="button" class="btn btn-danger btn-sm" onclick="abrirModal(this)">Eliminar</button></form></td></tr>
+    <% }) %></tbody>
+  </table></div>
+</div>
+<%- include('../partials/footer') %>

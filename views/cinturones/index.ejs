@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<div class="card">
+  <div class="top-bar"><h2><i class="bi bi-award"></i> Cinturones</h2><a href="/cinturones/crear" class="btn btn-success">+ Nuevo</a></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Nombre</th><th>Orden</th><th>Acciones</th></tr></thead>
+    <tbody><% cinturones.forEach(c => { %>
+      <tr><td><%= c.id_cinturon %></td><td><%= c.nombre_cinturon %></td><td><%= c.orden %></td>
+      <td class="actions"><a href="/cinturones/editar/<%= c.id_cinturon %>" class="btn btn-warning btn-sm">Editar</a>
+      <form action="/cinturones/eliminar/<%= c.id_cinturon %>" method="POST" style="display:inline"><button type="button" class="btn btn-danger btn-sm" onclick="abrirModal(this)">Eliminar</button></form></td></tr>
+    <% }) %></tbody>
+  </table></div>
+</div>
+<%- include('../partials/footer') %>
